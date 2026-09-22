@@ -1,1 +1,69 @@
+# ═══════════════════════════════════════════════════════════
+#        😎  MISSTU MUSIC BOT  😎
+#   GitHub : github.com/TOXICE765425/MisstuMusic
+#   Developer : @misstu_pro | Telegram
+#   Module : Pyrogram Bot Client Initialization
+# ═══════════════════════════════════════════════════════════
 
+import sys
+from pyrogram import Client, errors
+from pyrogram.enums import ChatMemberStatus
+
+import config
+from ..logging import LOGGER
+
+
+class MISSTU(Client):
+    def __init__(self):
+        super().__init__(
+            name="MisstuMusic",
+            api_id=config.API_ID,
+            api_hash=config.API_HASH,
+            bot_token=config.BOT_TOKEN,
+            in_memory=True,
+            workers=48,
+            max_concurrent_transmissions=7,
+            sleep_threshold=60,
+        )
+        LOGGER(__name__).info("Bot client initialized.")
+
+    async def start(self):
+        await super().start()
+        me = await self.get_me()
+        self.username, self.id = me.username, me.id
+        self.name = f"{me.first_name} {me.last_name or ''}".strip()
+        self.mention = me.mention
+
+        try:
+            await self.send_message(
+                config.LOGGER_ID,
+                (
+                    f"<u><b>» {self.mention} ʙᴏᴛ sᴛᴀʀᴛᴇᴅ :</b></u>\n\n"
+                    f"ɪᴅ : <code>{self.id}</code>\n"
+                    f"ɴᴀᴍᴇ : {self.name}\n"
+                    f"ᴜsᴇʀɴᴀᴍᴇ : @{self.username}"
+                ),
+            )
+        except (errors.ChannelInvalid, errors.PeerIdInvalid):
+            # Log group accessible na ho to bot exit na ho — sirf log miss hoga.
+            LOGGER(__name__).warning("⚠️ Bot cannot access the log group/channel – continuing without it.")
+            return
+        except Exception as exc:
+            LOGGER(__name__).warning(f"⚠️ Bot failed to access the log group: {type(exc).__name__} – continuing.")
+            return
+
+        try:
+            member = await self.get_chat_member(config.LOGGER_ID, self.id)
+            if member.status != ChatMemberStatus.ADMINISTRATOR:
+                LOGGER(__name__).warning("⚠️ Bot is not admin in the log group/channel – continuing without it.")
+                return
+        except Exception as e:
+            LOGGER(__name__).warning(f"⚠️ Could not check log group admin status: {e} – continuing.")
+            return
+
+        LOGGER(__name__).info(f"✅ Music Bot started as {self.name} (@{self.username})")
+
+# ═══════════════════════════════════════════════════════════
+#        😎  MISSTU MUSIC BOT  😎
+#   github.com/TOXICE765425/MisstuMusic
+# ═══════════════════════════════════════════════════════════
