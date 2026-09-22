@@ -97,15 +97,17 @@ STICKERS = [
     "CAACAgUAAyEFAASQje-AAAI90mkOFCn95GwjE62nWBG2o9H-FK15AAJgFQACJ_uwVMGj96qQgd3hHgQ",
     "CAACAgQAAyEFAASQje-AAAI90GkOFCDWtQkvBiumJxSoedz0NqvLAAIzFAAC9ED4UX1Ta6URzlyIHgQ",
 ]
-HELP_IMG_URL = "https://files.catbox.moe/a6sz5r.jpg"
+DEFAULT_THUMB = "MISSTUMUSIC/assets/thumb/misstu_default.png"
+HELP_IMG_URL = getenv("HELP_IMG_URL", DEFAULT_THUMB)
+
 PING_VID_URL = "https://files.catbox.moe/qibmue.mp4"
-PLAYLIST_IMG_URL = "https://files.catbox.moe/h9dan0.jpg"
+PLAYLIST_IMG_URL = getenv("PLAYLIST_IMG_URL", DEFAULT_THUMB)
 STATS_VID_URL = "https://files.catbox.moe/a6sz5r.jpg"
 TELEGRAM_AUDIO_URL = "https://files.catbox.moe/s8yhxr.jpg"
 TELEGRAM_VIDEO_URL = "https://files.catbox.moe/a6sz5r.jpg"
-STREAM_IMG_URL = "https://files.catbox.moe/h9dan0.jpg"
-SOUNCLOUD_IMG_URL = "https://files.catbox.moe/a6sz5r.jpg"
-YOUTUBE_IMG_URL = "https://files.catbox.moe/a6sz5r.jpg"
+STREAM_IMG_URL = getenv("STREAM_IMG_URL", DEFAULT_THUMB)
+SOUNCLOUD_IMG_URL = getenv("SOUNCLOUD_IMG_URL", DEFAULT_THUMB)
+YOUTUBE_IMG_URL = getenv("YOUTUBE_IMG_URL", DEFAULT_THUMB)
 SPOTIFY_ARTIST_IMG_URL = SPOTIFY_ALBUM_IMG_URL = SPOTIFY_PLAYLIST_IMG_URL = YOUTUBE_IMG_URL
 
 # ── Helpers ────────────────────────────────────────────────────────────
@@ -156,7 +158,7 @@ if COOKIE_URL and not re.match(r"^https://(batbin\.me|pastebin\.com)/[A-Za-z0-9]
     
 print("""
 ╔════════════════════════════════════╗
-║🎵 𝗩𝗜𝗦𝗛𝗔𝗟 𝗠𝗨𝗦𝗜𝗖 𝗕𝗢𝗧 𝗣𝗥𝗘𝗠𝗜𝗨𝗠 𝗘𝗗𝗜𝗧𝗜𝗢𝗡  
+║🎵 𝗠𝗜𝗦𝗦𝗧𝗨 𝗠𝗨𝗦𝗜𝗖 𝗕𝗢𝗧 𝗣𝗥𝗘𝗠𝗜𝗨𝗠 𝗘𝗗𝗜𝗧𝗜𝗢𝗡  
 ║       ✦ 𝗖𝗼𝗻𝗳𝗶𝗴 𝗟𝗼𝗮𝗱𝗲𝗱 𝗦𝘂𝗰𝗰𝗲𝘀𝘀! ✦   
 ╚════════════════════════════════════╝
 """)
