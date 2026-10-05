@@ -9,6 +9,9 @@ services:
     envVars:
       - key: PYTHONUNBUFFERED
         value: "1"
+      # Python 3.14 ki jagah 3.13.5 use karne ke liye ye line add karein
+      - key: PYTHON_VERSION
+        value: "3.13.5"
       - key: API_ID
         sync: false
       - key: API_HASH
